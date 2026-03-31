@@ -47,4 +47,11 @@ public class UserServiceImpl implements UserService {
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public User findByName(String username) {
+        return repository.findByName(username).orElseThrow(
+                () -> new EntityNotFoundException(MessageFormat.format("User not found: {}", username))
+        );
+    }
 }

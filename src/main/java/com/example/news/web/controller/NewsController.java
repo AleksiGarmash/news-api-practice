@@ -1,9 +1,8 @@
 package com.example.news.web.controller;
 
-import com.example.news.aop.OnlyUser;
+import com.example.news.aop.AuthorOnly;
 import com.example.news.mapper.NewsMapper;
 import com.example.news.model.News;
-import com.example.news.repository.NewsRepository;
 import com.example.news.service.NewsService;
 import com.example.news.web.model.NewsListResponse;
 import com.example.news.web.model.NewsRequest;
@@ -44,14 +43,14 @@ public class NewsController {
     }
 
     @PutMapping("/{id}")
-    @OnlyUser
+    @AuthorOnly
     public ResponseEntity<NewsResponse> update(@PathVariable Long id, @RequestBody @Valid NewsRequest request) {
         News news = newsService.update(newsMapper.requestToNews(id, request));
         return ResponseEntity.ok(newsMapper.newsToResponse(news));
     }
 
     @DeleteMapping("/{id}")
-    @OnlyUser
+    @AuthorOnly
     public ResponseEntity<NewsResponse> delete(@PathVariable Long id) {
         newsService.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

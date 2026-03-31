@@ -14,6 +14,7 @@ import java.util.List;
 public class UserResponse {
     private Long id;
     private String name;
+    private String password;
     private List<NewsResponse> newses;
     private List<CommentResponse> comments;
 }

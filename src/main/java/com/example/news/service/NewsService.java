@@ -16,6 +16,7 @@ public interface NewsService {
     News update(News news);
     void deleteById(Long id);
 
+
     default void checkForUpdate(Long newsId) {
         News currentNews = findById(newsId);
         Instant now = Instant.now();
